@@ -7,9 +7,9 @@ def shop_trip() -> None:
     # write your code here
     with open("app/config.json", "r") as k:
         data = json.load(k)
-        for i in data["customers"]:
+        for client in data["customers"]:
             shop_dict = {}
-            customer = Customer(i, data["FUEL_PRICE"])
+            customer = Customer(client, data["FUEL_PRICE"])
             print(f"{customer.name} has {customer.money} dollars")
             reserve_dict = {}
             count = 0

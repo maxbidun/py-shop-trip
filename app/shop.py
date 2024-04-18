@@ -1,6 +1,6 @@
 from app.customer import Customer
 from app.distance import Distance
-from datetime import datetime
+import datetime
 
 
 class Shop:
@@ -11,14 +11,15 @@ class Shop:
         self.dict_products = {}
         self.cost = 0
         self.distance = 0
-        self.time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+        self.time = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
     def price_products(self, customer_product: Customer) -> int:
-        for i in customer_product.product_cart:
-            price_for_product = (customer_product.product_cart[i]
-                                 * self.products[i])
-            self.dict_products.update({i: [price_for_product,
-                                           customer_product.product_cart[i]]})
+        for product in customer_product.product_cart:
+            price_for_product = (customer_product.product_cart[product]
+                                 * self.products[product])
+            self.dict_products.update({product: [
+                price_for_product,
+                customer_product.product_cart[product]]})
             self.cost += price_for_product
         distance = Distance(customer_product, self.location)
         self.cost += distance.distance_between()
